@@ -9,23 +9,25 @@
 /* Begin PBXBuildFile section */
 		186C84CC28CC912F00F08D13 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84CB28CC912F00F08D13 /* AppDelegate.swift */; };
 		186C84CE28CC912F00F08D13 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84CD28CC912F00F08D13 /* SceneDelegate.swift */; };
-		186C84D028CC912F00F08D13 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84CF28CC912F00F08D13 /* ViewController.swift */; };
 		186C84D328CC912F00F08D13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186C84D128CC912F00F08D13 /* Main.storyboard */; };
 		186C84D628CC912F00F08D13 /* Core_Data_App.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 186C84D428CC912F00F08D13 /* Core_Data_App.xcdatamodeld */; };
 		186C84D828CC913100F08D13 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 186C84D728CC913100F08D13 /* Assets.xcassets */; };
 		186C84DB28CC913100F08D13 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 186C84D928CC913100F08D13 /* LaunchScreen.storyboard */; };
+		186C84E728CC92E400F08D13 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84E628CC92E400F08D13 /* CategoriesTableViewController.swift */; };
+		186C84E928CC92F000F08D13 /* TodosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84E828CC92F000F08D13 /* TodosTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		186C84C828CC912F00F08D13 /* Core Data App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Core Data App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		186C84CB28CC912F00F08D13 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		186C84CD28CC912F00F08D13 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		186C84CF28CC912F00F08D13 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		186C84D228CC912F00F08D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		186C84D528CC912F00F08D13 /* Core_Data_App.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Core_Data_App.xcdatamodel; sourceTree = "<group>"; };
 		186C84D728CC913100F08D13 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		186C84DA28CC913100F08D13 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		186C84DC28CC913100F08D13 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		186C84E628CC92E400F08D13 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		186C84E828CC92F000F08D13 /* TodosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +82,8 @@
 		186C84E328CC91B100F08D13 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				186C84CF28CC912F00F08D13 /* ViewController.swift */,
+				186C84E628CC92E400F08D13 /* CategoriesTableViewController.swift */,
+				186C84E828CC92F000F08D13 /* TodosTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -174,9 +177,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				186C84D628CC912F00F08D13 /* Core_Data_App.xcdatamodeld in Sources */,
-				186C84D028CC912F00F08D13 /* ViewController.swift in Sources */,
 				186C84CC28CC912F00F08D13 /* AppDelegate.swift in Sources */,
 				186C84CE28CC912F00F08D13 /* SceneDelegate.swift in Sources */,
+				186C84E928CC92F000F08D13 /* TodosTableViewController.swift in Sources */,
+				186C84E728CC92E400F08D13 /* CategoriesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
