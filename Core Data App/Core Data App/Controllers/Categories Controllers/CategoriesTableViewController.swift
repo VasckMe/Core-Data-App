@@ -8,19 +8,17 @@
 import UIKit
 import CoreData
 
-class CategoriesTableViewController: UITableViewController {
+final class CategoriesTableViewController: UITableViewController {
     
     // MARK: - Properties
     
     var categories = [CategoryModel]()
-    
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+        
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadContext()
+        loadCategories()
         tableView.register(
             UINib(nibName: CategoryTableViewCell.identifier, bundle: nil),
             forCellReuseIdentifier: CategoryTableViewCell.identifier)
@@ -43,11 +41,11 @@ class CategoriesTableViewController: UITableViewController {
                 !text.isEmpty,
                 let self = self
             {
-                let category = CategoryModel(context: self.context)
+                let category = CategoryModel(context: CoreDataManager.context)
                 category.name = text
                 category.id = Int16(self.categories.count + 1)
                 self.categories.append(category)
-                self.saveContext()
+                CoreDataManager.saveContext()
                 self.tableView.insertRows(at: [IndexPath(row: self.categories.count-1, section: 0)], with: .automatic)
                 self.ControllerID()
             }
@@ -60,12 +58,18 @@ class CategoriesTableViewController: UITableViewController {
     
     // MARK: - Private functions
     
+    private func loadCategories() {
+        if let categories = CoreDataManager.loadCategories() {
+            self.categories = categories
+        }
+    }
+    
     private func ControllerID() {
         guard categories.count >= 1 else { return }
         for index in 0...categories.count-1 {
             categories[index].id = Int16(index+1)
         }
-        saveContext()
+        CoreDataManager.saveContext()
         tableView.reloadData()
     }
     
@@ -95,16 +99,12 @@ class CategoriesTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let id = categories[indexPath.row].id
-            let request: NSFetchRequest<CategoryModel> = CategoryModel.fetchRequest()
-            request.predicate = NSPredicate(format: "id==\(id)")
-            
-            if let categories = try? context.fetch(request) {
+            if let categories = CoreDataManager.loadCategories(predicate: NSPredicate(format: "id==\(id)")) {
                 for category in categories {
-                    context.delete(category)
+                    CoreDataManager.context.delete(category)
                 }
-                
                 self.categories.remove(at: indexPath.row)
-                saveContext()
+                CoreDataManager.saveContext()
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 ControllerID()
             }
@@ -125,31 +125,11 @@ class CategoriesTableViewController: UITableViewController {
 //        // Return false if you do not want the item to be re-orderable.
 //        return true
 //    }
-    
 
     // MARK: - Table view delegates
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "GoToTodosTVC", sender: nil)
-    }
-    
-    // MARK: - Core Data
-    
-    private func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Saving error \(error)")
-        }
-    }
-    
-    private func loadContext(with request: NSFetchRequest<CategoryModel> = CategoryModel.fetchRequest()) {
-        do {
-            categories = try context.fetch(request)
-        } catch {
-            print("Load error \(error)")
-        }
-        tableView.reloadData()
     }
     
     // MARK: - Navigation

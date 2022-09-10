@@ -8,7 +8,7 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
+final class CoreDataManager {
     static let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     static func saveContext() {
@@ -20,8 +20,12 @@ class CoreDataManager {
     }
     
     static func loadCategories(
-        with request: NSFetchRequest<CategoryModel> = CategoryModel.fetchRequest()) -> [CategoryModel]?
+        with request: NSFetchRequest<CategoryModel> = CategoryModel.fetchRequest(),
+        predicate: NSPredicate? = nil) -> [CategoryModel]?
     {
+        if let predicate = predicate {
+            request.predicate = predicate
+        }
         do {
             return try context.fetch(request)
         } catch {

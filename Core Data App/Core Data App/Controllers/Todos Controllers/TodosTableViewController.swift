@@ -8,16 +8,17 @@
 import UIKit
 import CoreData
 
-class TodosTableViewController: UITableViewController {
+final class TodosTableViewController: UITableViewController {
 
     // MARK: - Properties
-    
-    var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
+        
     var category: CategoryModel? {
         didSet {
             self.title = category?.name
-            loadContext()
+            guard
+                let category = category,
+                let todos = CoreDataManager.loadTodos(selectedCategory: category)else { return }
+            self.todos = todos
         }
     }
     
@@ -46,13 +47,13 @@ class TodosTableViewController: UITableViewController {
                 !text.isEmpty,
                 let self = self
             {
-                let todo = TodoModel(context: self.context)
+                let todo = TodoModel(context: CoreDataManager.context)
                 todo.name = text
                 todo.id_category = self.category
                 todo.id = Int16(self.todos.count+1)
                 
                 self.todos.append(todo)
-                self.saveContext()
+                CoreDataManager.saveContext()
                 self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
             }
         }
@@ -69,7 +70,7 @@ class TodosTableViewController: UITableViewController {
         for index in 0...todos.count-1 {
             todos[index].id = Int16(index+1)
         }
-        saveContext()
+        CoreDataManager.saveContext()
         tableView.reloadData()
     }
     
@@ -89,7 +90,7 @@ class TodosTableViewController: UITableViewController {
         cell.refresh(model: todo)
         cell.accessoryType = todo.done ? .checkmark : .none
         return cell
-     }
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -98,16 +99,18 @@ class TodosTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let idTodo = todos[indexPath.row].id
-            let request: NSFetchRequest<TodoModel> = TodoModel.fetchRequest()
-            request.predicate = NSPredicate(format: "id==\(idTodo)")
-            
-            if let todos = try? context.fetch(request) {
+            if
+                let category = category,
+                let todos = CoreDataManager.loadTodos(
+                    selectedCategory: category,
+                    predicate: NSPredicate(format: "id==\(idTodo)"))
+            {
                 for todo in todos {
-                    context.delete(todo)
+                    CoreDataManager.context.delete(todo)
                 }
                 self.todos.remove(at: indexPath.row)
-                saveContext()
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                CoreDataManager.saveContext()
+                tableView.deleteRows(at: [indexPath], with: .automatic)
                 IDController()
             }
         }
@@ -133,36 +136,7 @@ class TodosTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         todos[indexPath.row].done.toggle()
-        saveContext()
+        CoreDataManager.saveContext()
         tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
-    
-    // MARK: - Core Data
-    
-    private func saveContext() {
-        do {
-            try context.save()
-        } catch {
-            print("Saving error \(error)")
-        }
-    }
-    
-    private func loadContext(with request: NSFetchRequest<TodoModel> = TodoModel.fetchRequest(),
-                             predicate: NSPredicate? = nil) {
-        guard let categoryID = category?.id else { return }
-        let todoPredicate = NSPredicate(format: "id_category.id==\(categoryID)")
-        
-        if let predicate = predicate {
-            request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [todoPredicate, predicate])
-        } else {
-            request.predicate = todoPredicate
-        }
-        
-        do {
-            todos = try context.fetch(request)
-        } catch {
-            print("Load error \(error)")
-        }
-        tableView.reloadData()
     }
 }

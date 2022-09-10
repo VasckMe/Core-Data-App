@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryTableViewCell: UITableViewCell {
+final class CategoryTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var idLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
