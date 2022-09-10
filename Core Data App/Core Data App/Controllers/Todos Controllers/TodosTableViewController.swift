@@ -1,5 +1,5 @@
 //
-//  CategoriesTableViewController.swift
+//  TodosTableViewController.swift
 //  Core Data App
 //
 //  Created by Apple Macbook Pro 13 on 10.09.22.
@@ -7,10 +7,13 @@
 
 import UIKit
 
-class CategoriesTableViewController: UITableViewController {
+class TodosTableViewController: UITableViewController {
 
-    // MARK: - viewDidLoad
+    // MARK: - Properties
     
+    var category: CategoryModel?
+    
+    // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +26,7 @@ class CategoriesTableViewController: UITableViewController {
     
     // MARK: - IBActions
     
-    @IBAction func newCategoryAction(_ sender: UIBarButtonItem) {
+    @IBAction func newTodoAction(_ sender: UIBarButtonItem) {
     }
     
     // MARK: - Table view data source
@@ -84,7 +87,6 @@ class CategoriesTableViewController: UITableViewController {
     */
 
     // MARK: - Table view delegates
-    
     
     
     /*
