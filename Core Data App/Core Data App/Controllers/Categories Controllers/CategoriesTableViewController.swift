@@ -61,6 +61,7 @@ class CategoriesTableViewController: UITableViewController {
     // MARK: - Private functions
     
     private func ControllerID() {
+        guard categories.count >= 1 else { return }
         for index in 0...categories.count-1 {
             categories[index].id = Int16(index+1)
         }

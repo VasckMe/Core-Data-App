@@ -17,6 +17,9 @@
 		186C84E928CC92F000F08D13 /* TodosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186C84E828CC92F000F08D13 /* TodosTableViewController.swift */; };
 		18B8218F28CCB30100F62C10 /* CategoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8218D28CCB30100F62C10 /* CategoryTableViewCell.swift */; };
 		18B8219028CCB30100F62C10 /* CategoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B8218E28CCB30100F62C10 /* CategoryTableViewCell.xib */; };
+		18B8219528CCDCDC00F62C10 /* TodoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8219328CCDCDC00F62C10 /* TodoTableViewCell.swift */; };
+		18B8219628CCDCDC00F62C10 /* TodoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18B8219428CCDCDC00F62C10 /* TodoTableViewCell.xib */; };
+		18B8219928CCE1E700F62C10 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18B8219828CCE1E700F62C10 /* CoreDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		186C84E828CC92F000F08D13 /* TodosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosTableViewController.swift; sourceTree = "<group>"; };
 		18B8218D28CCB30100F62C10 /* CategoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewCell.swift; sourceTree = "<group>"; };
 		18B8218E28CCB30100F62C10 /* CategoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategoryTableViewCell.xib; sourceTree = "<group>"; };
+		18B8219328CCDCDC00F62C10 /* TodoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoTableViewCell.swift; sourceTree = "<group>"; };
+		18B8219428CCDCDC00F62C10 /* TodoTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoTableViewCell.xib; sourceTree = "<group>"; };
+		18B8219828CCE1E700F62C10 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,7 @@
 		186C84CA28CC912F00F08D13 /* Core Data App */ = {
 			isa = PBXGroup;
 			children = (
+				18B8219728CCE1D700F62C10 /* Managers */,
 				186C84E528CC91F100F08D13 /* Models */,
 				186C84E428CC91BC00F08D13 /* Views */,
 				186C84E328CC91B100F08D13 /* Controllers */,
@@ -131,8 +138,26 @@
 			isa = PBXGroup;
 			children = (
 				186C84E828CC92F000F08D13 /* TodosTableViewController.swift */,
+				18B8219228CCDCC900F62C10 /* Todo Cell View */,
 			);
 			path = "Todos Controllers";
+			sourceTree = "<group>";
+		};
+		18B8219228CCDCC900F62C10 /* Todo Cell View */ = {
+			isa = PBXGroup;
+			children = (
+				18B8219328CCDCDC00F62C10 /* TodoTableViewCell.swift */,
+				18B8219428CCDCDC00F62C10 /* TodoTableViewCell.xib */,
+			);
+			path = "Todo Cell View";
+			sourceTree = "<group>";
+		};
+		18B8219728CCE1D700F62C10 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				18B8219828CCE1E700F62C10 /* CoreDataManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +221,7 @@
 				186C84DB28CC913100F08D13 /* LaunchScreen.storyboard in Resources */,
 				186C84D828CC913100F08D13 /* Assets.xcassets in Resources */,
 				186C84D328CC912F00F08D13 /* Main.storyboard in Resources */,
+				18B8219628CCDCDC00F62C10 /* TodoTableViewCell.xib in Resources */,
 				18B8219028CCB30100F62C10 /* CategoryTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,11 +233,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B8219528CCDCDC00F62C10 /* TodoTableViewCell.swift in Sources */,
 				186C84D628CC912F00F08D13 /* Core_Data_App.xcdatamodeld in Sources */,
 				186C84CC28CC912F00F08D13 /* AppDelegate.swift in Sources */,
 				186C84CE28CC912F00F08D13 /* SceneDelegate.swift in Sources */,
 				186C84E928CC92F000F08D13 /* TodosTableViewController.swift in Sources */,
 				186C84E728CC92E400F08D13 /* CategoriesTableViewController.swift in Sources */,
+				18B8219928CCE1E700F62C10 /* CoreDataManager.swift in Sources */,
 				18B8218F28CCB30100F62C10 /* CategoryTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

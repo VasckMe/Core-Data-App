@@ -7,11 +7,12 @@
     </entity>
     <entity name="TodoModel" representedClassName="TodoModel" syncable="YES" codeGenerationType="class">
         <attribute name="done" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="id_category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryModel" inverseName="id_todos" inverseEntity="CategoryModel"/>
     </entity>
     <elements>
         <element name="CategoryModel" positionX="-247.166748046875" positionY="7.578033447265625" width="128" height="88"/>
-        <element name="TodoModel" positionX="-241.8796997070312" positionY="-172.5883483886719" width="128" height="73"/>
+        <element name="TodoModel" positionX="-241.8796997070312" positionY="-172.5883483886719" width="128" height="89"/>
     </elements>
 </model>
