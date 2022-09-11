@@ -10,6 +10,14 @@ import CoreData
 
 final class CategoriesTableViewController: UITableViewController {
     
+    // MARK: IBOutlets
+    
+    @IBOutlet private weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.searchTextField.textColor = .white
+        }
+    }
+    
     // MARK: - Properties
     
     var categories = [CategoryModel]()
@@ -23,6 +31,7 @@ final class CategoriesTableViewController: UITableViewController {
             UINib(nibName: CategoryTableViewCell.identifier, bundle: nil),
             forCellReuseIdentifier: CategoryTableViewCell.identifier)
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+        searchBar.delegate = self
     }
     
     // MARK: - IBActions
@@ -137,5 +146,17 @@ final class CategoriesTableViewController: UITableViewController {
            let indexPath = tableView.indexPathForSelectedRow {
             todosTVC.category = categories[indexPath.row]
         }
+    }
+}
+
+// MARK: - Extension
+
+extension CategoriesTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let predicate = searchText.isEmpty ? nil : NSPredicate(
+            format: "name CONTAINS %@",searchText)
+        guard let categories = CoreDataManager.loadCategories(predicate: predicate) else { return }
+        self.categories = categories
+        tableView.reloadData()
     }
 }

@@ -10,6 +10,14 @@ import CoreData
 
 final class TodosTableViewController: UITableViewController {
 
+    // MARK: IBOutlets
+    
+    @IBOutlet private weak var searchBar: UISearchBar! {
+        didSet {
+            searchBar.searchTextField.textColor = .white
+        }
+    }
+    
     // MARK: - Properties
         
     var category: CategoryModel? {
@@ -27,6 +35,7 @@ final class TodosTableViewController: UITableViewController {
     // MARK: - viewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        searchBar.delegate = self
         tableView.register(
             UINib(nibName: TodoTableViewCell.identifier, bundle: nil),
             forCellReuseIdentifier: TodoTableViewCell.identifier)
@@ -137,5 +146,22 @@ final class TodosTableViewController: UITableViewController {
         todos[indexPath.row].done.toggle()
         CoreDataManager.saveContext()
         tableView.reloadRows(at: [indexPath], with: .automatic)
+    }
+}
+
+// MARK: - Extension
+
+extension TodosTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let predicate = searchText.isEmpty ? nil : NSPredicate(
+            format: "name CONTAINS %@", searchText.lowercased())
+        guard
+            let category = category,
+            let todos = CoreDataManager.loadTodos(selectedCategory: category, predicate: predicate)
+        else {
+            return
+        }
+        self.todos = todos
+        tableView.reloadData()
     }
 }
