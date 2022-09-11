@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21G72" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CategoryModel" representedClassName="CategoryModel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="id_todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TodoModel" inverseName="id_category" inverseEntity="TodoModel"/>
+    </entity>
+    <entity name="TodoModel" representedClassName="TodoModel" syncable="YES" codeGenerationType="class">
+        <attribute name="done" optional="YES" attributeType="Boolean" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="id_category" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CategoryModel" inverseName="id_todos" inverseEntity="CategoryModel"/>
+    </entity>
+    <elements>
+        <element name="CategoryModel" positionX="-247.166748046875" positionY="7.578033447265625" width="128" height="88"/>
+        <element name="TodoModel" positionX="-241.8796997070312" positionY="-172.5883483886719" width="128" height="89"/>
+    </elements>
+</model>
