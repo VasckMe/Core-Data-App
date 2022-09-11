@@ -22,11 +22,12 @@ final class CategoriesTableViewController: UITableViewController {
         tableView.register(
             UINib(nibName: CategoryTableViewCell.identifier, bundle: nil),
             forCellReuseIdentifier: CategoryTableViewCell.identifier)
+        self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
     
     // MARK: - IBActions
     
-    @IBAction func newCategoryAction(_ sender: UIBarButtonItem) {
+    @IBAction private func newCategoryAction(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add category",
                                       message: "Write the name of category",
                                       preferredStyle: .alert)
@@ -110,21 +111,18 @@ final class CategoriesTableViewController: UITableViewController {
             }
         }
     }
-    
 
-    /*
-    // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let category = self.categories.remove(at: fromIndexPath.row)
+        self.categories.insert(category, at: to.row)
+        ControllerID()
+//        CoreDataManager.saveContext()
+        tableView.reloadData()
     }
-    */
 
-    
-    // Override to support conditional rearranging of the table view.
-//    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//        // Return false if you do not want the item to be re-orderable.
-//        return true
-//    }
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
 
     // MARK: - Table view delegates
     

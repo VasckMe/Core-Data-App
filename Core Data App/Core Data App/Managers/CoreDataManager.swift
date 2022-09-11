@@ -23,6 +23,7 @@ final class CoreDataManager {
         with request: NSFetchRequest<CategoryModel> = CategoryModel.fetchRequest(),
         predicate: NSPredicate? = nil) -> [CategoryModel]?
     {
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         if let predicate = predicate {
             request.predicate = predicate
         }
@@ -39,6 +40,7 @@ final class CoreDataManager {
         with request: NSFetchRequest<TodoModel> = TodoModel.fetchRequest(),
         predicate: NSPredicate? = nil) -> [TodoModel]?
     {
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         let categoryId = selectedCategory.id
         let categoryPredicate = NSPredicate(format: "id_category.id==\(categoryId)")
         if let predicate = predicate {

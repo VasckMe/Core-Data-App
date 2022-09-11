@@ -30,11 +30,12 @@ final class TodosTableViewController: UITableViewController {
         tableView.register(
             UINib(nibName: TodoTableViewCell.identifier, bundle: nil),
             forCellReuseIdentifier: TodoTableViewCell.identifier)
+        self.navigationItem.rightBarButtonItems?.append(self.editButtonItem)
     }
     
     // MARK: - IBActions
     
-    @IBAction func newTodoAction(_ sender: UIBarButtonItem) {
+    @IBAction private func newTodoAction(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Add todo", message: "write todo's name", preferredStyle: .alert)
         alert.addTextField { textField in
             textField.placeholder = "todo"
@@ -55,6 +56,7 @@ final class TodosTableViewController: UITableViewController {
                 self.todos.append(todo)
                 CoreDataManager.saveContext()
                 self.tableView.insertRows(at: [IndexPath(row: self.todos.count-1, section: 0)], with: .automatic)
+                self.IDController()
             }
         }
         
@@ -116,20 +118,17 @@ final class TodosTableViewController: UITableViewController {
         }
     }
     
-    /*
-    // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+        let removedTodo = todos.remove(at: fromIndexPath.row)
+        todos.insert(removedTodo, at: to.row)
+        IDController()
+        
+        tableView.reloadData()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
+    
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    */
 
     // MARK: - Table view delegates
     
